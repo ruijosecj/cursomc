@@ -25,4 +25,9 @@ public class CategoriaService {
 		categoria.setId(null);
 		return catRepository.save(categoria);
 	}
+	
+	public Categoria update(Categoria categoria) {
+		find(categoria.getId());
+		return catRepository.save(categoria);
+	}
 }
