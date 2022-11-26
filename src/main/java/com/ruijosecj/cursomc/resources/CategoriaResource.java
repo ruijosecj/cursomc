@@ -1,6 +1,8 @@
 package com.ruijosecj.cursomc.resources;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.ruijosecj.cursomc.domain.Categoria;
+import com.ruijosecj.cursomc.dto.CategoriaDTO;
 import com.ruijosecj.cursomc.services.CategoriaService;
 
 @RestController
@@ -51,6 +54,15 @@ public class CategoriaResource {
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		catService.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<CategoriaDTO>> findAll() {
+		
+		List<Categoria> categorias = catService.findAll();
+		List<CategoriaDTO> categoriasDTO = categorias.stream()
+				.map(categoria -> new CategoriaDTO(categoria)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(categoriasDTO);
 	}
 	
 }
