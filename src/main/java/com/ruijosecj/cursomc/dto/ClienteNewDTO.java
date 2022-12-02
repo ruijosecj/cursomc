@@ -2,21 +2,42 @@ package com.ruijosecj.cursomc.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
+import com.ruijosecj.cursomc.services.validation.ClienteInsert;
+
+@ClienteInsert
 public class ClienteNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@NotEmpty(message = "Preenchimento obirgatório")
+	@Length(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres")
 	private String nome;
+	
+	@NotEmpty(message = "Preenchimento obirgatório")
+	@Email(message = "Email inválido")
 	private String email;
+	
+	@NotEmpty(message = "Preenchimento obirgatório")
 	private String cpfOuCnpj;
+	
 	private Integer tipoCliente;
 	
-	private Integer id;
+	@NotEmpty(message = "Preenchimento obirgatório")
 	private String logradouro;
+	
+	@NotEmpty(message = "Preenchimento obirgatório")
 	private String numero;
 	private String complemento;
 	private String bairro;
+	
+	@NotEmpty(message = "Preenchimento obirgatório")
 	private String cep;
 	
+	@NotEmpty(message = "Preenchimento obirgatório")
 	private String telefone1;
 	private String telefone2;
 	private String telefone3;
@@ -55,14 +76,6 @@ public class ClienteNewDTO implements Serializable {
 
 	public void setTipoCliente(Integer tipoCliente) {
 		this.tipoCliente = tipoCliente;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getLogradouro() {
